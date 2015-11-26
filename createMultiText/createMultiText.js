@@ -1,16 +1,13 @@
+// TODO : allow passing the strings via pipe or filename
+// TODO : allow passing the output filename
+
 var fs = require("fs");
 
-header = fs.readFileSync("TextMacroHeader.bin");
-footer = fs.readFileSync("TextMacroFooter.bin");
+header = fs.readFileSync("Header.bin");
+footer = fs.readFileSync("Footer.bin");
 
 text = fs.readFileSync("strings.txt",'utf8');
 //console.log("Text ", text.length);
-
-var bt = new Buffer(8);
-bt.fill(0);
-bt.writeUInt16LE(5);
-bt.writeUInt16LE(4,4);
-//console.log(bt);
 
 var eolLen = 1;
 if(text.indexOf("\r") != -1) {
