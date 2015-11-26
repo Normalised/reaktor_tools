@@ -1,0 +1,24 @@
+Text Entry List
+
+UINT32 Number of entries (n)
+n Strings
+
+
+String Type
+UINT32 Length (L)
+L CHARs
+
+Modules
+
+5b start [
+
+String ID
+
+5d end   ]
+
+
+Module IDs
+
+KSModul
+KInPort
+KOutPort
