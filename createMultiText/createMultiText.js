@@ -1,13 +1,31 @@
-// TODO : allow passing the strings via pipe or filename
-// TODO : allow passing the output filename
-
 var fs = require("fs");
+
+var args = process.argv;
+
+inputFile = "strings.txt";
+outputFile = "multiTextMacro.mdl";
+if(args.length == 2) {
+	console.log('Using default filenames');
+}
+else if(args.length == 3) {
+	inputFile = args[2];
+} else if(args.length > 3) {
+	inputFile = args[2];
+	outputFile = args[3];
+}
+
+try {
+	fs.accessSync(inputFile, fs.R_OK);
+} catch (err) {
+	console.error('Cant open',inputFile,' for reading');
+	process.exit(1);
+}
 
 header = fs.readFileSync("Header.bin");
 footer = fs.readFileSync("Footer.bin");
 
 text = fs.readFileSync("strings.txt",'utf8');
-//console.log("Text ", text.length);
+console.log("Read", text.length, "text entries.");
 
 var eolLen = 1;
 if(text.indexOf("\r") != -1) {
@@ -55,6 +73,8 @@ for(var i=0;i<lines.length;i++) {
 
 outBuf = Buffer.concat([header,textBuffer,footer]);
 
-var fd = fs.openSync("newTextMacro.mdl",'w');
+var fd = fs.openSync(outputFile,'w');
 fs.writeSync(fd, outBuf, 0, outBuf.length);
 fs.closeSync(fd);
+
+console.log('Saved',outputFile);
