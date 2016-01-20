@@ -24,7 +24,7 @@ try {
 header = fs.readFileSync("Header.bin");
 footer = fs.readFileSync("Footer.bin");
 
-text = fs.readFileSync("strings.txt",'utf8');
+text = fs.readFileSync(inputFile,'utf8');
 console.log("Read", text.length, "text entries.");
 
 var eolLen = 1;
